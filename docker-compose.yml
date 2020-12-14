@@ -29,7 +29,7 @@ services:
     image: mongo:4.2.10
     restart: always
     volumes:
-      - ./mongod.conf:/etc/mongod.conf
+      - ./mongo/mongod.conf:/etc/mongod.conf
       - ./mongodb:/data/db
     command: mongod --config /etc/mongod.conf
     env_file: app.env
