@@ -2,25 +2,16 @@ version: "3.8"
 
 services:
   nginx:
-    image: nginx:alpine
-    restart: always
+    image: staticfloat/nginx-certbot
+    restart: unless-stopped
     ports:
       - 80:80
       - 443:443
-    command: '/bin/sh -c ''while :; do sleep 6h & wait $${!}; nginx -s reload; done & nginx -g "daemon off;"'''
+    environment:
+      CERTBOT_EMAIL: evgheni.calcutin@gmail.com
     volumes:
-      - ./nginx/:/etc/nginx/conf.d/
-      - ./certbot/conf:/etc/letsencrypt
-      - ./certbot/www:/var/www/certbot
-    depends_on:
-      - dashboard
-  certbot:
-    image: certbot/certbot
-    restart: always
-    entrypoint: "/bin/sh -c 'trap exit TERM; while :; do certbot renew; sleep 12h & wait $${!}; done;'"
-    volumes:
-      - ./certbot/conf:/etc/letsencrypt
-      - ./certbot/www:/var/www/certbot
+      - ./nginx:/etc/nginx/user.conf.d:ro
+      - letsencrypt:/etc/letsencrypt
   dashboard:
     image: velesstan/dashboard
     restart: always
@@ -44,3 +35,5 @@ services:
     env_file: app.env
     ports:
       - "27017:27017"
+volumes:
+  letsencrypt:
