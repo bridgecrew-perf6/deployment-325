@@ -5,7 +5,7 @@ if ! [ -x "$(command -v docker-compose)" ]; then
   exit 1
 fi
 
-domains=(xpeditepermits.com demo.xpeditepermits.com)
+domains=(veles.services)
 rsa_key_size=4096
 data_path="./data/prod/certbot"
 email="evgheni.calcutin@gmail.com" # Adding a valid address is strongly recommended
