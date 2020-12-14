@@ -42,7 +42,6 @@ services:
     environment:
       - CLEANUP=true
       - INTERVAL=30
-      - LOG_LEVEL=info
       - SELF_UPDATE=true
       - IGNORE=database
     restart: unless-stopped
