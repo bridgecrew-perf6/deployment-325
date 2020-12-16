@@ -41,7 +41,7 @@ services:
     image: pyouroboros/ouroboros
     environment:
       - CLEANUP=true
-      - INTERVAL=30
+      - INTERVAL=180
       - SELF_UPDATE=true
       - IGNORE=database
     restart: unless-stopped
