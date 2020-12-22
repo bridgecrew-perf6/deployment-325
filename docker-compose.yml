@@ -35,17 +35,11 @@ services:
     env_file: app.env
     ports:
       - "27017:27017"
-  ouroboros:
-    container_name: ouroboros
-    hostname: ouroboros
-    image: pyouroboros/ouroboros
-    environment:
-      - CLEANUP=true
-      - INTERVAL=180
-      - SELF_UPDATE=true
-      - IGNORE=database
-    restart: unless-stopped
+  watchtower:
+    image: containrrr/watchtower
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
+      - /root/.docker/config.json:/config.json
+    command: --interval 30
 volumes:
   letsencrypt:
